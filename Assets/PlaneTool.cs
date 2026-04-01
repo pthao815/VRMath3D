@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlaneTool : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class PlaneTool : MonoBehaviour
         bool triggered = false;
 
         #if UNITY_EDITOR
-        triggered = Mouse.current.leftButton.wasPressedThisFrame;
+        triggered = Input.GetMouseButtonDown(0);
         #else
         triggered = OVRInput.GetDown(
             OVRInput.Button.PrimaryIndexTrigger);
@@ -19,19 +18,29 @@ public class PlaneTool : MonoBehaviour
 
         if (triggered)
         {
-            points[pointCount] = transform.position;
+            Vector3 pos;
+
+            #if UNITY_EDITOR
+            // Trên PC dùng vị trí ngẫu nhiên để test
+            pos = new Vector3(
+                Random.Range(-1f, 1f),
+                Random.Range(-1f, 1f),
+                Random.Range(-1f, 1f)
+            );
+            #else
+            pos = transform.position;
+            #endif
+
+            points[pointCount] = pos;
             pointCount++;
-            Debug.Log("Điểm " + pointCount + ": " 
-                      + points[pointCount - 1]);
+            Debug.Log("Điểm " + pointCount + ": " + points[pointCount - 1]);
 
             if (pointCount == 3)
             {
-                // Kiểm tra 3 điểm có thẳng hàng không
                 if (MathUtilities.AreCollinear(
                     points[0], points[1], points[2]))
                 {
-                    Debug.LogWarning(
-                        "3 điểm thẳng hàng, không tạo được mặt phẳng!");
+                    Debug.LogWarning("3 điểm thẳng hàng!");
                 }
                 else
                 {
@@ -45,7 +54,6 @@ public class PlaneTool : MonoBehaviour
     void BuildPlane(Vector3 a, Vector3 b, Vector3 c)
     {
         Vector3 d = a + (c - b);
-
         Mesh mesh = new Mesh();
         mesh.vertices = new Vector3[] { a, b, c, d };
         mesh.triangles = new int[] { 0, 1, 2, 0, 2, 3 };

@@ -4,23 +4,22 @@ public class PCTestController : MonoBehaviour
 {
     public float speed = 3f;
     public float sensitivity = 2f;
-    float rotX = 60f;
+    float rotX = 30f;
     float rotY = 0f;
+    bool initialized = false;
 
-    void Start()
-    {
-        #if !UNITY_EDITOR
-        enabled = false;
-        return;
-        #endif
-        transform.rotation = Quaternion.Euler(rotX, rotY, 0);
-    }
-
-    void Update()
+    void LateUpdate()
     {
         #if !UNITY_EDITOR
         return;
         #endif
+
+        if (!initialized)
+        {
+            transform.position = new Vector3(0f, 1.5f, -2f);
+            transform.rotation = Quaternion.Euler(rotX, rotY, 0);
+            initialized = true;
+        }
 
         if (Input.GetMouseButton(1))
         {

@@ -70,6 +70,7 @@
     <Compile Include="Assets\GridTextureGenerator.cs" />
     <Compile Include="Assets\WristPaletteController.cs" />
     <Compile Include="Assets\PlaneTool.cs" />
+    <Compile Include="Assets\ToolManager.cs" />
     <Compile Include="Assets\LineTool.cs" />
     <Compile Include="Assets\PointTool.cs" />
     <Compile Include="Assets\MathUtilities.cs" />
