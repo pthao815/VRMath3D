@@ -4,12 +4,24 @@ public class PCTestController : MonoBehaviour
 {
     public float speed = 3f;
     public float sensitivity = 2f;
-    float rotX, rotY;
+    float rotX = 60f;
+    float rotY = 0f;
 
-    
-    
+    void Start()
+    {
+        #if !UNITY_EDITOR
+        enabled = false;
+        return;
+        #endif
+        transform.rotation = Quaternion.Euler(rotX, rotY, 0);
+    }
+
     void Update()
     {
+        #if !UNITY_EDITOR
+        return;
+        #endif
+
         if (Input.GetMouseButton(1))
         {
             rotX -= Input.GetAxis("Mouse Y") * sensitivity;
@@ -23,7 +35,7 @@ public class PCTestController : MonoBehaviour
             0,
             Input.GetAxis("Vertical")
         );
-        transform.position += transform.TransformDirection(move) 
+        transform.position += transform.TransformDirection(move)
                               * speed * Time.deltaTime;
     }
 }
