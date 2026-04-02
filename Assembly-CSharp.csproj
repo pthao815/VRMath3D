@@ -66,11 +66,16 @@
   <ItemGroup>
     <Compile Include="Assets\PCTestController.cs" />
     <Compile Include="Assets\LessonStateMachine.cs" />
+    <Compile Include="Assets\TeleportVignette.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\GridTextureGenerator.cs" />
     <Compile Include="Assets\WristPaletteController.cs" />
+    <Compile Include="Assets\PyramidMesh.cs" />
+    <Compile Include="Assets\SnapSystem.cs" />
     <Compile Include="Assets\PlaneTool.cs" />
     <Compile Include="Assets\ToolManager.cs" />
+    <Compile Include="Assets\TetrahedronMesh.cs" />
+    <Compile Include="Assets\Billboard.cs" />
     <Compile Include="Assets\LineTool.cs" />
     <Compile Include="Assets\PointTool.cs" />
     <Compile Include="Assets\MathUtilities.cs" />
